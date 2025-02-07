@@ -1,0 +1,22 @@
+name: Upload Artifacts Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload-artifact-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Create a File
+        run: echo "This is an example artifact file" > output.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: output.txt

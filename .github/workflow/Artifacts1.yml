@@ -1,0 +1,24 @@
+name: GitHub Actions Artifacts Example
+
+on:
+  push:
+    branches:
+      - main  # Run when pushing to the main branch
+
+jobs:
+  upload-artifact-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Create a File to Upload
+        run: echo "This is an artifact file" > artifact-file.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: artifact-file.txt
+          retention-days: 5  # Optional: Set how long the artifact is stored (max: 90 days)

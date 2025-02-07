@@ -1,0 +1,21 @@
+name: Test Custom Action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  use-custom-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use My Custom Action
+        uses: ./my-custom-action
+        with:
+          directory: './my-directory'
+          filename: 'myfile.txt'
+          

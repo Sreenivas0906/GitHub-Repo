@@ -1,0 +1,13 @@
+name: Simple CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Run a Script
+        run: echo "Hello, GitHub Actions!"

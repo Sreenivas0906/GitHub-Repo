@@ -1,0 +1,39 @@
+name: VM Schedule
+
+on:
+  schedule:
+    - cron: "0 10 * * *" # Runs at 10:00 AM UTC
+    - cron: "0 18 * * *" # Runs at 6:00 PM UTC
+
+jobs:
+  start-vms:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 10 * * *'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Apply Terraform to start VMs
+        run: terraform apply -auto-approve
+
+  stop-vms:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 18 * * *'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Destroy Terraform to stop VMs
+        run: terraform destroy -auto-approve

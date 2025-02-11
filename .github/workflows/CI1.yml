@@ -26,7 +26,7 @@ jobs:
 
       - name: Run tests
         run: |
-        npm test || true  # This prevents failure but allows you to see errors
+          npm test || true  # This prevents failure but allows you to see errors
         # Run tests (you can modify it according to your project)
 
   deploy:

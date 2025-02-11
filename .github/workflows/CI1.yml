@@ -22,7 +22,10 @@ jobs:
       
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          cd your-subdirectory
+          npm install 
+
 
       - name: Run Tests
         run: npm test

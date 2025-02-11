@@ -1,32 +1,30 @@
-name: CI/CD Pipeline
+name: CI Pipeline
 
 on:
   push:
     branches:
+      - main
       - test
   pull_request:
     branches:
+      - main
       - test
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3  # Updated to v3
-
-      - name: Verify Repository Files
-        run: ls -R  # Debug step to check file structure
+        uses: actions/checkout@v3
 
       - name: Set Up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
-        working-directory: .  # Ensure it runs in the correct directory
+        run: npm ci
 
       - name: Run Tests
         run: npm test

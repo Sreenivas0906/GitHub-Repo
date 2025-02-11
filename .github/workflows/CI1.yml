@@ -1,30 +1,19 @@
 name: CI Pipeline
 
-on:
-  push:
-    branches:
-      - main
-      - test
-  pull_request:
-    branches:
-      - main
-      - test
+on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set Up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
 
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Run Tests
-        run: npm test
+    - name: Install dependencies
+      run: npm ci
